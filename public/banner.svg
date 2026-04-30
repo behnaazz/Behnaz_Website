@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 320" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#FBE3E5"/>
+      <stop offset="55%"  stop-color="#FAEAB8"/>
+      <stop offset="100%" stop-color="#FFE0CB"/>
+    </linearGradient>
+    <linearGradient id="hill1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#E2EAD2"/>
+      <stop offset="100%" stop-color="#CCDAB6"/>
+    </linearGradient>
+    <linearGradient id="hill2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#B5C4A0"/>
+      <stop offset="100%" stop-color="#9DB287"/>
+    </linearGradient>
+    <linearGradient id="hill3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#9CAE8B"/>
+      <stop offset="100%" stop-color="#7E9270"/>
+    </linearGradient>
+    <radialGradient id="sunglow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%"   stop-color="#E89B7E" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#E89B7E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect width="1600" height="320" fill="url(#sky)"/>
+
+  <!-- sun & glow -->
+  <circle cx="1240" cy="92" r="120" fill="url(#sunglow)"/>
+  <circle cx="1240" cy="92" r="46"  fill="#E89B7E"/>
+  <circle cx="1240" cy="92" r="46"  fill="#FBE3E5" opacity="0.18"/>
+
+  <!-- clouds -->
+  <g fill="#FFFFFF" opacity="0.85">
+    <ellipse cx="180"  cy="74" rx="58" ry="13"/>
+    <ellipse cx="220"  cy="66" rx="36" ry="10"/>
+    <ellipse cx="640"  cy="52" rx="64" ry="13"/>
+    <ellipse cx="690"  cy="44" rx="38" ry="10"/>
+    <ellipse cx="980"  cy="100" rx="50" ry="11"/>
+    <ellipse cx="1010" cy="93"  rx="30" ry="9"/>
+  </g>
+
+  <!-- birds -->
+  <g stroke="#2D2823" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.55">
+    <path d="M 420 110 q 9 -9 18 0 q 9 -9 18 0"/>
+    <path d="M 470  88 q 7 -7 14 0 q 7 -7 14 0"/>
+    <path d="M 870 130 q 8 -8 16 0 q 8 -8 16 0"/>
+    <path d="M 920 148 q 6 -6 12 0 q 6 -6 12 0"/>
+  </g>
+
+  <!-- furthest hills -->
+  <path d="M 0 215 Q 180 165 380 200 T 760 185 T 1140 200 T 1600 175 L 1600 320 L 0 320 Z"
+        fill="url(#hill1)"/>
+
+  <!-- mid hills -->
+  <path d="M 0 250 Q 160 200 340 235 T 700 225 T 1080 235 T 1600 215 L 1600 320 L 0 320 Z"
+        fill="url(#hill2)" opacity="0.92"/>
+
+  <!-- nearest hills -->
+  <path d="M 0 285 Q 200 245 420 275 T 820 268 T 1240 285 T 1600 268 L 1600 320 L 0 320 Z"
+        fill="url(#hill3)"/>
+
+  <!-- a small tree on the right hill -->
+  <g>
+    <rect x="1378" y="252" width="5" height="40" fill="#5C6B4F"/>
+    <circle cx="1380" cy="246" r="22" fill="#9DB287"/>
+    <circle cx="1368" cy="240" r="16" fill="#B5C4A0"/>
+    <circle cx="1394" cy="240" r="14" fill="#B5C4A0"/>
+    <circle cx="1380" cy="232" r="12" fill="#CCDAB6"/>
+  </g>
+
+  <!-- a smaller tree on the left -->
+  <g>
+    <rect x="178" y="270" width="4" height="30" fill="#5C6B4F"/>
+    <circle cx="180" cy="265" r="14" fill="#9DB287"/>
+    <circle cx="172" cy="260" r="10" fill="#B5C4A0"/>
+    <circle cx="188" cy="261" r="9"  fill="#B5C4A0"/>
+  </g>
+
+  <!-- grass strokes -->
+  <g stroke="#5C6B4F" stroke-width="1.4" stroke-linecap="round" opacity="0.7">
+    <path d="M 60 320 L 60 304"/>   <path d="M 70 320 L 73 300"/>   <path d="M 82 320 L 80 308"/>
+    <path d="M 240 320 L 240 304"/> <path d="M 252 320 L 254 300"/>
+    <path d="M 410 320 L 410 305"/> <path d="M 420 320 L 422 298"/> <path d="M 432 320 L 430 308"/>
+    <path d="M 600 320 L 600 304"/> <path d="M 612 320 L 614 300"/>
+    <path d="M 760 320 L 760 305"/> <path d="M 770 320 L 772 298"/>
+    <path d="M 920 320 L 920 304"/> <path d="M 932 320 L 934 300"/>
+    <path d="M 1080 320 L 1080 305"/><path d="M 1090 320 L 1092 300"/>
+    <path d="M 1240 320 L 1240 304"/><path d="M 1252 320 L 1254 298"/>
+    <path d="M 1480 320 L 1480 304"/><path d="M 1492 320 L 1494 298"/>
+  </g>
+
+  <!-- flowers in the foreground -->
+  <g>
+    <!-- pink daisy -->
+    <line x1="320" y1="320" x2="320" y2="288" stroke="#5C6B4F" stroke-width="1.6"/>
+    <g transform="translate(320 286)">
+      <circle cx="-6" cy="0"  r="4" fill="#F2BFC4"/>
+      <circle cx="6"  cy="0"  r="4" fill="#F2BFC4"/>
+      <circle cx="0"  cy="-6" r="4" fill="#F2BFC4"/>
+      <circle cx="0"  cy="6"  r="4" fill="#F2BFC4"/>
+      <circle cx="0"  cy="0"  r="3" fill="#F2D58A"/>
+    </g>
+
+    <!-- butter daisy -->
+    <line x1="500" y1="320" x2="500" y2="293" stroke="#5C6B4F" stroke-width="1.6"/>
+    <g transform="translate(500 291)">
+      <circle cx="-5" cy="0"  r="3.5" fill="#F2D58A"/>
+      <circle cx="5"  cy="0"  r="3.5" fill="#F2D58A"/>
+      <circle cx="0"  cy="-5" r="3.5" fill="#F2D58A"/>
+      <circle cx="0"  cy="5"  r="3.5" fill="#F2D58A"/>
+      <circle cx="0"  cy="0"  r="2.5" fill="#E89B7E"/>
+    </g>
+
+    <!-- mauve daisy -->
+    <line x1="1100" y1="320" x2="1100" y2="288" stroke="#5C6B4F" stroke-width="1.6"/>
+    <g transform="translate(1100 286)">
+      <circle cx="-6" cy="0"  r="4" fill="#C9A9C7"/>
+      <circle cx="6"  cy="0"  r="4" fill="#C9A9C7"/>
+      <circle cx="0"  cy="-6" r="4" fill="#C9A9C7"/>
+      <circle cx="0"  cy="6"  r="4" fill="#C9A9C7"/>
+      <circle cx="0"  cy="0"  r="3" fill="#FBE3E5"/>
+    </g>
+
+    <!-- coral tulip -->
+    <line x1="1310" y1="320" x2="1310" y2="296" stroke="#5C6B4F" stroke-width="1.6"/>
+    <path d="M 1304 296 Q 1310 282 1316 296 Z" fill="#E89B7E"/>
+
+    <!-- pink tulip -->
+    <line x1="800" y1="320" x2="800" y2="298" stroke="#5C6B4F" stroke-width="1.6"/>
+    <path d="M 794 298 Q 800 285 806 298 Z" fill="#F2BFC4"/>
+  </g>
+
+  <!-- butterfly -->
+  <g transform="translate(680 175) rotate(-12)">
+    <ellipse cx="-7" cy="-2" rx="6" ry="9" fill="#F2BFC4" opacity="0.95"/>
+    <ellipse cx="7"  cy="-2" rx="6" ry="9" fill="#F2BFC4" opacity="0.95"/>
+    <ellipse cx="-6" cy="6"  rx="4" ry="6" fill="#C9A9C7" opacity="0.95"/>
+    <ellipse cx="6"  cy="6"  rx="4" ry="6" fill="#C9A9C7" opacity="0.95"/>
+    <line x1="0" y1="-6" x2="0" y2="8" stroke="#2D2823" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+</svg>
