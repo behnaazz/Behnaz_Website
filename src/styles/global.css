@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+@theme {
+  /* Cute, modern palette — soft cream + coral + pink + sage + butter */
+  --color-cream: #FAF6EF;
+  --color-cream-warm: #F5EFE3;
+  --color-card: #FFFFFF;
+  --color-ink: #2D2823;
+  --color-ink-soft: #6B5E54;
+  --color-ink-muted: #9C8E84;
+
+  --color-coral: #E89B7E;
+  --color-coral-soft: #F4C2A8;
+  --color-pink: #F2BFC4;
+  --color-pink-soft: #FBE3E5;
+  --color-sage: #B5C4A0;
+  --color-sage-soft: #DDE6CE;
+  --color-butter: #F2D58A;
+  --color-butter-soft: #FAEAB8;
+  --color-mauve: #C9A9C7;
+  --color-mauve-soft: #E8D6E7;
+
+  --color-line: #E8DFD2;
+
+  /* Typography */
+  --font-serif: "Fraunces", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  /* Radii */
+  --radius-soft: 14px;
+  --radius-soft-lg: 20px;
+
+  /* Shadows */
+  --shadow-cozy: 0 1px 2px rgb(45 40 35 / 0.04), 0 8px 24px rgb(45 40 35 / 0.06);
+  --shadow-cozy-lg: 0 2px 4px rgb(45 40 35 / 0.05), 0 18px 40px rgb(45 40 35 / 0.10);
+}
+
+/* base — opt out of browser-forced dark mode */
+:root {
+  color-scheme: light only;
+  forced-color-adjust: none;
+}
+
+html {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  color-scheme: light only;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  min-height: 100dvh;
+}
+
+/* Hard override: tell the browser this site is light, even if it tries to force dark.
+   This catches Edge/Chrome "Force Dark Mode" experiments, Samsung Internet, etc. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light only;
+  }
+  html, body {
+    background: var(--color-cream) !important;
+    color: var(--color-ink) !important;
+  }
+}
+
+/* Decorative grain — very subtle paper texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.18 0 0 0 0 0.16 0 0 0 0 0.14 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+main, header, footer { position: relative; z-index: 1; }
+
+::selection {
+  background: var(--color-pink-soft);
+  color: var(--color-ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.15; }
+h3 { font-size: 1.25rem; line-height: 1.3; }
+
+/* prose styles for markdown content */
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-ink);
+}
+.prose > * + * { margin-top: 1.1em; }
+.prose h2 { margin-top: 2em; margin-bottom: 0.4em; }
+.prose h3 { margin-top: 1.6em; margin-bottom: 0.3em; }
+.prose a {
+  color: var(--color-ink);
+  background-image: linear-gradient(transparent 60%, var(--color-pink-soft) 60%);
+  transition: background-color 0.2s ease;
+}
+.prose a:hover {
+  background-image: linear-gradient(transparent 60%, var(--color-coral-soft) 60%);
+}
+.prose strong { font-weight: 600; }
+.prose em { font-style: italic; color: var(--color-ink-soft); }
+.prose blockquote {
+  border-left: 3px solid var(--color-coral);
+  padding-left: 1.1em;
+  margin-left: 0;
+  color: var(--color-ink-soft);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1em;
+}
+.prose code {
+  background: var(--color-cream-warm);
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-family: var(--font-mono);
+}
+.prose pre {
+  background: var(--color-cream-warm) !important;
+  border: 1px solid var(--color-line);
+  padding: 1em 1.2em;
+  border-radius: var(--radius-soft);
+  overflow-x: auto;
+  font-size: 0.9em;
+}
+.prose pre code {
+  background: transparent;
+  padding: 0;
+}
+.prose ul, .prose ol {
+  padding-left: 1.4em;
+}
+.prose ul { list-style: none; }
+.prose ul li { position: relative; }
+.prose ul li::before {
+  content: "";
+  position: absolute;
+  left: -1.1em;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-coral);
+}
+.prose ol { list-style: decimal; }
+.prose ol li::marker { color: var(--color-coral); font-weight: 600; }
+.prose img {
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-cozy);
+}
+.prose hr {
+  border: none;
+  height: 1px;
+  background: var(--color-line);
+  margin: 2.5em 0;
+}
+
+/* Squiggle underline utility */
+.squiggle {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 8' preserveAspectRatio='none'><path d='M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4' stroke='%23E89B7E' stroke-width='1.6' fill='none'/></svg>");
+  background-repeat: repeat-x;
+  background-position: 0 100%;
+  background-size: 80px 6px;
+  padding-bottom: 8px;
+}
+
+/* Soft animated underline for nav */
+.nav-link {
+  position: relative;
+  padding: 0.25rem 0.1rem;
+  transition: color 0.18s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-coral);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.22s ease;
+}
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* tag chip */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--color-pink-soft);
+  color: var(--color-ink);
+  border: 1px solid transparent;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.tag-recipe   { background: var(--color-sage-soft); }
+.tag-thought  { background: var(--color-butter-soft); }
+.tag-project  { background: var(--color-mauve-soft); }
+.tag-art      { background: var(--color-pink-soft); }
+.tag-code     { background: var(--color-coral-soft); }
+
+/* card */
+.card {
+  background: var(--color-card);
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-soft-lg);
+  padding: 1.4rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-cozy-lg);
+  border-color: var(--color-coral-soft);
+}
+.card h3, .card p, .card span { color: var(--color-ink); }
+.card p.text-\[color\:var\(--color-ink-soft\)\] { color: var(--color-ink-soft); }
+
+/* Any white surface explicitly stays light */
+.bg-white {
+  background-color: #FFFFFF !important;
+  color: var(--color-ink);
+}
+
+/* fade-in on scroll-ish (just an entry animation) */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.5s ease both; }
+.rise-delay-1 { animation-delay: 0.05s; }
+.rise-delay-2 { animation-delay: 0.10s; }
+.rise-delay-3 { animation-delay: 0.15s; }
+.rise-delay-4 { animation-delay: 0.20s; }

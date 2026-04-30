@@ -1,0 +1,18 @@
+---
+interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+const cls = `tag tag-${name.toLowerCase()}`;
+const emoji: Record<string, string> = {
+  recipe: "🍋",
+  thought: "✿",
+  project: "✦",
+  art: "❀",
+  code: "❍",
+};
+---
+<a href={`/writing?tag=${name.toLowerCase()}`} class={cls}>
+  <span aria-hidden="true">{emoji[name.toLowerCase()] ?? "·"}</span>
+  {name}
+</a>

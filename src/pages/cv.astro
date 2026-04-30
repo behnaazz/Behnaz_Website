@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="CV — Behnaz" description="A short version of my CV.">
+  <section class="rise">
+    <p class="mb-3 text-sm uppercase tracking-[0.2em] text-[color:var(--color-coral)]">cv</p>
+    <h1 class="mb-6">curriculum vitae</h1>
+
+    <p class="mb-8 max-w-prose text-[color:var(--color-ink-soft)]">
+      The full PDF is the source of truth — this page is a quick scroll for the
+      curious. <a href="/cv.pdf" class="underline decoration-[color:var(--color-coral)] decoration-2 underline-offset-4 hover:text-[color:var(--color-coral)]">download the full CV (PDF) ↓</a>
+    </p>
+
+    <div class="space-y-12">
+      <div>
+        <h2 class="mb-4">now</h2>
+        <div class="card">
+          <p class="text-xs uppercase tracking-wider text-[color:var(--color-ink-muted)]">jan 2026 — present</p>
+          <h3 class="mt-1 text-lg">researcher · medit, rwth aachen</h3>
+          <p class="mt-1 text-[0.95rem] text-[color:var(--color-ink-soft)]">
+            deep learning for thermal-infrared medical monitoring (NeuroSys project).
+            building pipelines, training models in PyTorch, deploying to embedded hardware.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="mb-4">previously</h2>
+        <div class="space-y-3">
+          <div class="card">
+            <p class="text-xs uppercase tracking-wider text-[color:var(--color-ink-muted)]">jun 2022 — sep 2024</p>
+            <h3 class="mt-1 text-lg">research assistant · ruhr university bochum</h3>
+            <p class="mt-1 text-[0.95rem] text-[color:var(--color-ink-soft)]">
+              data-driven decision support for energy technologies — multi-criteria
+              analysis, life-cycle costing, dashboards in dash/streamlit.
+            </p>
+          </div>
+          <div class="card">
+            <p class="text-xs uppercase tracking-wider text-[color:var(--color-ink-muted)]">aug 2023</p>
+            <h3 class="mt-1 text-lg">intern · physikalisch-technische bundesanstalt (PTB)</h3>
+            <p class="mt-1 text-[0.95rem] text-[color:var(--color-ink-soft)]">
+              automated computer-vision pipeline to extract numerical data from
+              measurement images (OpenCV, OOP).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="mb-4">education</h2>
+        <div class="space-y-3">
+          <div class="card">
+            <p class="text-xs uppercase tracking-wider text-[color:var(--color-ink-muted)]">2021 — 2024</p>
+            <h3 class="mt-1 text-lg">m.sc. lasers & photonics · ruhr university bochum</h3>
+            <p class="mt-1 text-[0.95rem] text-[color:var(--color-ink-soft)]">
+              final grade 94/100. master thesis on raman spectroscopy + ML for
+              hydrogen impurity quantification (98/100). awarded best master's
+              graduate of the year.
+            </p>
+          </div>
+          <div class="card">
+            <p class="text-xs uppercase tracking-wider text-[color:var(--color-ink-muted)]">2015 — 2020</p>
+            <h3 class="mt-1 text-lg">b.sc. mechanical engineering · ferdowsi university of mashhad</h3>
+            <p class="mt-1 text-[0.95rem] text-[color:var(--color-ink-soft)]">
+              bachelor thesis on solar-powered water distillation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="mb-4">tools i use</h2>
+        <div class="flex flex-wrap gap-2">
+          {["python", "pytorch", "scikit-learn", "opencv", "pandas", "numpy", "matplotlib", "sql", "matlab", "c++", "git", "html/css", "solidworks", "ansys"].map((t) => (
+            <span class="rounded-full border border-[color:var(--color-line)] bg-white px-3 py-1 text-sm">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h2 class="mb-4">languages</h2>
+        <ul class="space-y-1 text-[0.95rem] text-[color:var(--color-ink-soft)]">
+          <li>persian — mother tongue</li>
+          <li>english — C2 (TOEFL iBT 113)</li>
+          <li>german — C1</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

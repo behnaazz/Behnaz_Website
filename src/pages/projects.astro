@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects"))
+  .sort((a, b) => (a.data.featured === b.data.featured ? b.data.year.localeCompare(a.data.year) : (a.data.featured ? -1 : 1)));
+---
+<BaseLayout title="Projects — Behnaz" description="Things I've built and worked on.">
+  <section class="rise">
+    <p class="mb-3 text-sm uppercase tracking-[0.2em] text-[color:var(--color-coral)]">projects</p>
+    <h1 class="mb-3">things i've made ✦</h1>
+    <p class="mb-10 max-w-prose text-lg text-[color:var(--color-ink-soft)]">
+      research, code, and side experiments — usually somewhere between optics,
+      machine learning, and a useful little tool.
+    </p>
+
+    <div class="grid gap-4">
+      {projects.map((p) => (
+        <article class="card flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div class="min-w-0">
+            <div class="mb-1.5 flex flex-wrap items-center gap-2 text-xs text-[color:var(--color-ink-muted)]">
+              <span>{p.data.year}</span>
+              {p.data.role && <><span>·</span><span>{p.data.role}</span></>}
+              {p.data.featured && <span class="tag tag-project">featured</span>}
+            </div>
+            <h3 class="mb-1.5 text-xl">
+              {p.data.emoji && <span class="mr-1.5">{p.data.emoji}</span>}
+              {p.data.title}
+            </h3>
+            <p class="text-[0.95rem] leading-relaxed text-[color:var(--color-ink-soft)]">
+              {p.data.description}
+            </p>
+            {p.data.stack.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {p.data.stack.map((s) => (
+                  <span class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-cream-warm)] px-2.5 py-0.5 text-xs">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+          {p.data.link && (
+            <a
+              href={p.data.link}
+              target="_blank"
+              rel="noopener"
+              class="shrink-0 self-start rounded-full border border-[color:var(--color-coral)] px-4 py-1.5 text-sm text-[color:var(--color-coral)] transition hover:bg-[color:var(--color-coral)] hover:text-white"
+            >
+              visit ↗
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

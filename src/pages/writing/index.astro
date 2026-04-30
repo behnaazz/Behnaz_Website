@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+
+const all = (await getCollection("posts", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const tagSet = new Set<string>();
+all.forEach((p) => p.data.tags.forEach((t) => tagSet.add(t)));
+const tags = Array.from(tagSet).sort();
+---
+<BaseLayout title="Writing — Behnaz" description="Thoughts, recipes, notes, and field reports.">
+  <section class="rise">
+    <p class="mb-3 text-sm uppercase tracking-[0.2em] text-[color:var(--color-coral)]">writing</p>
+    <h1 class="mb-3">the garden 🌱</h1>
+    <p class="mb-10 max-w-prose text-lg text-[color:var(--color-ink-soft)]">
+      a slow-growing collection — half-finished thoughts, recipes i keep coming
+      back to, notes from papers, and the occasional tiny essay.
+    </p>
+
+    <div class="mb-8 flex flex-wrap items-center gap-2">
+      <span class="text-sm text-[color:var(--color-ink-muted)]">filter:</span>
+      <a href="/writing" class="tag" data-tag="all">all</a>
+      {tags.map((t) => (
+        <a href={`/writing?tag=${t}`} class={`tag tag-${t.toLowerCase()}`} data-tag={t.toLowerCase()}>
+          {t}
+        </a>
+      ))}
+    </div>
+
+    <div id="post-list" class="grid gap-4">
+      {all.map((p) => (
+        <div class="post-item" data-tags={p.data.tags.map((t) => t.toLowerCase()).join(",")}>
+          <PostCard
+            href={`/writing/${p.id}`}
+            title={p.data.title}
+            description={p.data.description}
+            date={p.data.date}
+            tags={p.data.tags}
+            emoji={p.data.emoji}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Simple client-side tag filter via ?tag=foo
+  const params = new URLSearchParams(window.location.search);
+  const tag = params.get("tag");
+  if (tag) {
+    document.querySelectorAll<HTMLElement>(".post-item").forEach((el) => {
+      const tags = (el.dataset.tags ?? "").split(",");
+      el.style.display = tags.includes(tag) ? "" : "none";
+    });
+    document.querySelectorAll<HTMLElement>("[data-tag]").forEach((el) => {
+      if (el.dataset.tag === tag) {
+        el.style.outline = "2px solid var(--color-coral)";
+        el.style.outlineOffset = "2px";
+      }
+    });
+  }
+</script>

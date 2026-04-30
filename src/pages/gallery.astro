@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// To add real images, drop them in /public/gallery/ and add entries below.
+const items = [
+  { src: "/gallery/placeholder-1.svg", alt: "soft sunrise study", caption: "morning study, april" },
+  { src: "/gallery/placeholder-2.svg", alt: "thermal scan sketch", caption: "thermal portrait sketch" },
+  { src: "/gallery/placeholder-3.svg", alt: "kitchen still life",  caption: "kitchen still life" },
+  { src: "/gallery/placeholder-4.svg", alt: "wald walk",            caption: "öcher wald, golden hour" },
+  { src: "/gallery/placeholder-5.svg", alt: "marginalia",           caption: "thesis marginalia" },
+  { src: "/gallery/placeholder-6.svg", alt: "lab notebook",         caption: "lab notebook page" },
+];
+---
+<BaseLayout title="Gallery — Behnaz" description="Sketches, photos, and small visual experiments.">
+  <section class="rise">
+    <p class="mb-3 text-sm uppercase tracking-[0.2em] text-[color:var(--color-coral)]">gallery</p>
+    <h1 class="mb-3">small visual things ❀</h1>
+    <p class="mb-10 max-w-prose text-lg text-[color:var(--color-ink-soft)]">
+      sketches, film photos, and the occasional thermal portrait. updated when i
+      remember to.
+    </p>
+
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
+      {items.map((it, i) => (
+        <figure class={`group rise rise-delay-${(i % 4) + 1}`}>
+          <div class="overflow-hidden rounded-[var(--radius-soft)] border border-[color:var(--color-line)] bg-white aspect-[4/5]">
+            <img
+              src={it.src}
+              alt={it.alt}
+              loading="lazy"
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+          </div>
+          <figcaption class="mt-2 text-xs text-[color:var(--color-ink-muted)]">
+            {it.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
