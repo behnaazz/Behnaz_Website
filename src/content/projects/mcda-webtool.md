@@ -1,9 +1,9 @@
 ---
-title: MCDA webtool — energy technology comparison
-description: data-driven multi-criteria decision support tool for evaluating energy technologies. integrates a custom database, life-cycle costing, and CO₂ accounting behind an interactive Dash dashboard.
+title: MCDA Webtool — Energy Technology Comparison
+description: A data-driven multi-criteria decision support tool for evaluating energy technologies. Integrates a custom database, life-cycle costing, and CO₂ accounting behind an interactive Dash dashboard.
 year: "2024"
-role: research assistant · RUB
-stack: [python, dash, pandas, html/css]
+role: Research Assistant · RUB
+stack: [Python, Dash, pandas, HTML / CSS]
 emoji: 🌿
 link: https://mcda-webtool.ee.rub.de/
 featured: false

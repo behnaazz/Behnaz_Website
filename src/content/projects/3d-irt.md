@@ -1,9 +1,9 @@
 ---
-title: 3D-IRT — dual OAK thermal 3D scanning
-description: research project at RWTH MedIT on combining stereo OAK depth cameras with thermal imaging to reconstruct 3D thermal surfaces of patients.
+title: 3D-IRT — Dual OAK Thermal 3D Scanning
+description: Research project at RWTH MedIT on combining stereo OAK depth cameras with thermal imaging to reconstruct 3D thermal surfaces of patients.
 year: "2026"
-role: researcher
-stack: [python, pytorch, depthai, opencv, open3d]
+role: Researcher
+stack: [Python, PyTorch, DepthAI, OpenCV, Open3D]
 emoji: 🌡️
 featured: true
 ---

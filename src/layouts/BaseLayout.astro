@@ -6,9 +6,14 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  showBanner?: boolean;
 }
 
-const { title = "Behnaz", description = "A small corner of the internet — research, code, recipes, thoughts." } = Astro.props;
+const {
+  title = "Behnaz",
+  description = "A small corner of the internet — research, code, recipes, thoughts.",
+  showBanner = true,
+} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +26,6 @@ const { title = "Behnaz", description = "A small corner of the internet — rese
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Google Fonts: Fraunces + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,11 +35,12 @@ const { title = "Behnaz", description = "A small corner of the internet — rese
   </head>
   <body>
     <Header />
-    <div class="banner" aria-hidden="true">
-      <img src="/banner.svg" alt="" />
-      <div class="banner-fade"></div>
-    </div>
-    <main class="mx-auto max-w-3xl px-6 pb-24 pt-6 md:pt-10">
+    {showBanner && (
+      <div class="banner" aria-hidden="true">
+        <img src="/banner.svg" alt="" />
+      </div>
+    )}
+    <main class="page">
       <slot />
     </main>
     <Footer />

@@ -1,24 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-// To add real images, drop them in /public/gallery/ and add entries below.
 const items = [
-  { src: "/gallery/placeholder-1.svg", alt: "soft sunrise study", caption: "morning study, april" },
-  { src: "/gallery/placeholder-2.svg", alt: "thermal scan sketch", caption: "thermal portrait sketch" },
-  { src: "/gallery/placeholder-3.svg", alt: "kitchen still life",  caption: "kitchen still life" },
-  { src: "/gallery/placeholder-4.svg", alt: "wald walk",            caption: "öcher wald, golden hour" },
-  { src: "/gallery/placeholder-5.svg", alt: "marginalia",           caption: "thesis marginalia" },
-  { src: "/gallery/placeholder-6.svg", alt: "lab notebook",         caption: "lab notebook page" },
+  { src: "/gallery/placeholder-1.svg", alt: "soft sunrise study", caption: "Morning study, April" },
+  { src: "/gallery/placeholder-2.svg", alt: "thermal scan sketch", caption: "Thermal portrait sketch" },
+  { src: "/gallery/placeholder-3.svg", alt: "kitchen still life",  caption: "Kitchen still life" },
+  { src: "/gallery/placeholder-4.svg", alt: "wald walk",            caption: "Aachener Wald, golden hour" },
+  { src: "/gallery/placeholder-5.svg", alt: "marginalia",           caption: "Thesis marginalia" },
+  { src: "/gallery/placeholder-6.svg", alt: "lab notebook",         caption: "Lab notebook page" },
 ];
 ---
 <BaseLayout title="Gallery — Behnaz" description="Sketches, photos, and small visual experiments.">
   <section class="rise">
-    <p class="mb-3 text-sm uppercase tracking-[0.2em] text-[color:var(--color-coral)]">gallery</p>
-    <h1 class="mb-3">small visual things ❀</h1>
-    <p class="mb-10 max-w-prose text-lg text-[color:var(--color-ink-soft)]">
-      sketches, film photos, and the occasional thermal portrait. updated when i
-      remember to.
-    </p>
+    <div class="page-head">
+      <p class="eyebrow">gallery</p>
+      <h1>Small Visual Things</h1>
+      <p class="lede">
+        Sketches, film photos, and the occasional thermal portrait. Updated
+        when I remember to.
+      </p>
+    </div>
 
     <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
       {items.map((it, i) => (

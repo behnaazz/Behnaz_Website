@@ -1,15 +1,14 @@
 ---
 const year = new Date().getFullYear();
 ---
-<footer class="mx-auto max-w-3xl px-6 pb-10 pt-4 text-sm text-[color:var(--color-ink-muted)]">
-  <div class="flex flex-wrap items-center justify-between gap-4 border-t border-[color:var(--color-line)] pt-6">
-    <p>
-      © {year} Behnaz · made with care in Aachen
-    </p>
+<footer class="text-sm text-[color:var(--color-ink-muted)]" style="border-top: 1px solid var(--color-line);">
+  <div class="mx-auto flex flex-wrap items-center justify-between gap-4 px-6 py-6"
+       style="max-width: var(--max-page);">
+    <p>© {year} · Behnaz · Made with care in Aachen</p>
     <div class="flex items-center gap-4">
-      <a href="mailto:hello@behnaz.example" class="nav-link">email</a>
-      <a href="https://www.linkedin.com/" class="nav-link" target="_blank" rel="noopener">linkedin</a>
-      <a href="https://github.com/" class="nav-link" target="_blank" rel="noopener">github</a>
+      <a href="mailto:hello@behnaz.example" class="nav-link">Email</a>
+      <a href="https://www.linkedin.com/" class="nav-link" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/" class="nav-link" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </footer>

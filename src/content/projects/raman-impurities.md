@@ -1,9 +1,9 @@
 ---
-title: raman + ML for hydrogen impurity detection
-description: master's thesis — end-to-end pipeline from raw spectra to quantitative impurity readouts using regression models on engineered spectral features. graded 98/100.
+title: Raman + ML for Hydrogen Impurity Detection
+description: Master's thesis — end-to-end pipeline from raw spectra to quantitative impurity readouts using regression models on engineered spectral features. Graded 98/100.
 year: "2024"
-role: m.sc. thesis · ruhr university bochum
-stack: [python, scikit-learn, pandas, numpy, matplotlib]
+role: M.Sc. Thesis · Ruhr University Bochum
+stack: [Python, scikit-learn, pandas, NumPy, Matplotlib]
 emoji: 🔬
 featured: true
 ---

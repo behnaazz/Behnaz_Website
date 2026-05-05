@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import PostCard from "../../components/PostCard.astro";
+import Tag from "../../components/Tag.astro";
 import { getCollection } from "astro:content";
 
 const all = (await getCollection("posts", ({ data }) => !data.draft))
@@ -9,40 +9,80 @@ const all = (await getCollection("posts", ({ data }) => !data.draft))
 const tagSet = new Set<string>();
 all.forEach((p) => p.data.tags.forEach((t) => tagSet.add(t)));
 const tags = Array.from(tagSet).sort();
+
+// group by year for tidy index
+const byYear = new Map<number, typeof all>();
+for (const p of all) {
+  const y = new Date(p.data.date).getFullYear();
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(p);
+}
+const years = Array.from(byYear.keys()).sort((a, b) => b - a);
+
+const fmt = (d: string | Date) =>
+  new Date(d).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
 ---
-<BaseLayout title="Writing — Behnaz" description="Thoughts, recipes, notes, and field reports.">
+<BaseLayout
+  title="Writing — Behnaz"
+  description="Thoughts, recipes, notes, and field reports."
+>
   <section class="rise">
-    <p class="mb-3 text-sm uppercase tracking-[0.2em] text-[color:var(--color-coral)]">writing</p>
-    <h1 class="mb-3">the garden 🌱</h1>
-    <p class="mb-10 max-w-prose text-lg text-[color:var(--color-ink-soft)]">
-      a slow-growing collection — half-finished thoughts, recipes i keep coming
-      back to, notes from papers, and the occasional tiny essay.
-    </p>
+    <div class="page-head">
+      <p class="eyebrow">writing</p>
+      <h1>The Garden</h1>
+      <p class="lede">
+        A slow-growing collection — half-finished thoughts, recipes I keep
+        coming back to, notes from papers, and the occasional small essay.
+        <strong>{all.length}</strong> entries so far.
+      </p>
+    </div>
 
     <div class="mb-8 flex flex-wrap items-center gap-2">
-      <span class="text-sm text-[color:var(--color-ink-muted)]">filter:</span>
+      <span class="text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">Filter</span>
       <a href="/writing" class="tag" data-tag="all">all</a>
       {tags.map((t) => (
-        <a href={`/writing?tag=${t}`} class={`tag tag-${t.toLowerCase()}`} data-tag={t.toLowerCase()}>
+        <a
+          href={`/writing?tag=${t}`}
+          class={`tag tag-${t.toLowerCase()}`}
+          data-tag={t.toLowerCase()}
+        >
           {t}
         </a>
       ))}
     </div>
 
-    <div id="post-list" class="grid gap-4">
-      {all.map((p) => (
-        <div class="post-item" data-tags={p.data.tags.map((t) => t.toLowerCase()).join(",")}>
-          <PostCard
-            href={`/writing/${p.id}`}
-            title={p.data.title}
-            description={p.data.description}
-            date={p.data.date}
-            tags={p.data.tags}
-            emoji={p.data.emoji}
-          />
+    {years.map((y) => (
+      <div class="index-group">
+        <div class="index-group-title">
+          <span>{y}</span>
+          <span class="index-group-title-count">{byYear.get(y)!.length} {byYear.get(y)!.length === 1 ? "entry" : "entries"}</span>
         </div>
-      ))}
-    </div>
+        <ul class="index-list">
+          {byYear.get(y)!.map((p) => (
+            <li
+              class="post-item"
+              data-tags={p.data.tags.map((t) => t.toLowerCase()).join(",")}
+            >
+              <a href={`/writing/${p.id}`} class="index-row">
+                <span class="index-date">{fmt(p.data.date)}</span>
+                <span>
+                  <span class="index-title">
+                    {p.data.emoji && <span class="mr-1.5">{p.data.emoji}</span>}
+                    {p.data.title}
+                  </span>
+                  {p.data.description && (
+                    <span class="index-desc">{p.data.description}</span>
+                  )}
+                </span>
+                <span class="index-meta">
+                  {p.data.tags.map((t) => <Tag name={t} />)}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
   </section>
 </BaseLayout>
 

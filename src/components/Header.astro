@@ -1,34 +1,28 @@
 ---
 const path = Astro.url.pathname;
-const isActive = (p: string) => path === p || (p !== "/" && path.startsWith(p));
+const isActive = (p: string) =>
+  p === "/" ? path === "/" : path.startsWith(p);
 
 const links = [
-  { href: "/", label: "home" },
-  { href: "/about", label: "about" },
-  { href: "/writing", label: "writing" },
-  { href: "/projects", label: "projects" },
-  { href: "/gallery", label: "gallery" },
-  { href: "/cv", label: "cv" },
+  { href: "/",         label: "Home" },
+  { href: "/about",    label: "About" },
+  { href: "/writing",  label: "Writing" },
+  { href: "/projects", label: "Projects" },
+  { href: "/gallery",  label: "Gallery" },
+  { href: "/cv",       label: "CV" },
 ];
 ---
-<header class="mx-auto max-w-3xl px-6 pt-8">
-  <div class="flex items-center justify-between gap-6">
-    <a href="/" class="group flex items-center gap-2.5">
-      <span
-        class="grid h-9 w-9 place-items-center rounded-full bg-[color:var(--color-coral-soft)] text-[color:var(--color-ink)] transition-transform duration-300 group-hover:rotate-12"
-        style="font-family: var(--font-serif); font-weight: 600;"
-      >
-        b
-      </span>
-      <span class="text-lg" style="font-family: var(--font-serif); font-weight: 500;">
-        behnaz
-      </span>
+<header class="topnav">
+  <div class="topnav-inner">
+    <a href="/" class="topnav-brand">
+      <span class="topnav-brand-name">Behnaz</span>
+      <span class="topnav-brand-tag">a small garden</span>
     </a>
-    <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-      {links.slice(1).map((l) => (
+    <nav class="topnav-links" aria-label="primary">
+      {links.map((l) => (
         <a
           href={l.href}
-          class:list={["nav-link", { "is-active": isActive(l.href) }]}
+          class:list={["topnav-link", { "is-active": isActive(l.href) }]}
         >
           {l.label}
         </a>
