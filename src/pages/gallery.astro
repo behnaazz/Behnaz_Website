@@ -1,13 +1,44 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import fs from "node:fs";
+import path from "node:path";
+
+// Walk a directory recursively, return all image paths relative to /gallery/...
+const portugalDir = path.join(process.cwd(), "public", "gallery", "portugal");
+const isImage = (f: string) => /\.(jpe?g|png|webp)$/i.test(f);
+function listImages(dir: string, rel = ""): string[] {
+  const out: string[] = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const sub = path.join(dir, entry.name);
+    const subRel = rel ? `${rel}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) out.push(...listImages(sub, subRel));
+    else if (entry.isFile() && isImage(entry.name)) out.push(subRel);
+  }
+  return out;
+}
+const portugalImages = listImages(portugalDir).sort();
+const portugalCount = portugalImages.length;
+const portugalCover = portugalImages[0]
+  ? `/gallery/portugal/${portugalImages[0]}`
+  : "/gallery/placeholder-1.svg";
+
+const collections = [
+  {
+    href: "/gallery/portugal",
+    title: "Portugal, April 2025",
+    note: "A slow week along the Portuguese coast — pastel streets, ocean light, grilled sardines.",
+    cover: portugalCover,
+    count: portugalCount,
+  },
+];
 
 const items = [
-  { src: "/gallery/placeholder-1.svg", alt: "soft sunrise study", caption: "Morning study, April" },
+  { src: "/gallery/placeholder-1.svg", alt: "soft sunrise study",  caption: "Morning study, April" },
   { src: "/gallery/placeholder-2.svg", alt: "thermal scan sketch", caption: "Thermal portrait sketch" },
   { src: "/gallery/placeholder-3.svg", alt: "kitchen still life",  caption: "Kitchen still life" },
-  { src: "/gallery/placeholder-4.svg", alt: "wald walk",            caption: "Aachener Wald, golden hour" },
-  { src: "/gallery/placeholder-5.svg", alt: "marginalia",           caption: "Thesis marginalia" },
-  { src: "/gallery/placeholder-6.svg", alt: "lab notebook",         caption: "Lab notebook page" },
+  { src: "/gallery/placeholder-4.svg", alt: "wald walk",           caption: "Aachener Wald, golden hour" },
+  { src: "/gallery/placeholder-5.svg", alt: "marginalia",          caption: "Thesis marginalia" },
+  { src: "/gallery/placeholder-6.svg", alt: "lab notebook",        caption: "Lab notebook page" },
 ];
 ---
 <BaseLayout title="Gallery — Behnaz" description="Sketches, photos, and small visual experiments.">
@@ -21,22 +52,100 @@ const items = [
       </p>
     </div>
 
-    <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
-      {items.map((it, i) => (
-        <figure class={`group rise rise-delay-${(i % 4) + 1}`}>
-          <div class="overflow-hidden rounded-[var(--radius-soft)] border border-[color:var(--color-line)] bg-white aspect-[4/5]">
-            <img
-              src={it.src}
-              alt={it.alt}
-              loading="lazy"
-              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-            />
-          </div>
-          <figcaption class="mt-2 text-xs text-[color:var(--color-ink-muted)]">
-            {it.caption}
-          </figcaption>
-        </figure>
-      ))}
+    <div class="index-group">
+      <div class="index-group-title">
+        <span>Travel</span>
+        <span class="index-group-title-count">{collections.length} {collections.length === 1 ? "set" : "sets"}</span>
+      </div>
+      <div class="travel-grid">
+        {collections.map((c) => (
+          <a href={c.href} class="travel-card">
+            <div class="travel-cover">
+              <img src={c.cover} alt={c.title} loading="lazy" />
+            </div>
+            <div class="travel-meta">
+              <h3 class="travel-title">{c.title}</h3>
+              <p class="travel-note">{c.note}</p>
+              <p class="travel-count">{c.count} photos →</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="index-group">
+      <div class="index-group-title"><span>Sketches &amp; small things</span></div>
+      <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
+        {items.map((it, i) => (
+          <figure class={`group rise rise-delay-${(i % 4) + 1}`}>
+            <div class="overflow-hidden rounded-[var(--radius-soft)] border border-[color:var(--color-line)] bg-white aspect-[4/5]">
+              <img
+                src={it.src}
+                alt={it.alt}
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            </div>
+            <figcaption class="mt-2 text-xs text-[color:var(--color-ink-muted)]">
+              {it.caption}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .travel-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 720px) {
+    .travel-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .travel-card {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1rem;
+    padding: 0.85rem;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-soft-lg);
+    transition: border-color 0.2s ease;
+    align-items: center;
+  }
+  .travel-card:hover { border-color: var(--color-ink-muted); }
+  .travel-cover {
+    width: 110px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--radius-soft);
+    background: var(--color-cream-warm);
+  }
+  .travel-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .travel-meta { min-width: 0; }
+  .travel-title {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .travel-note {
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+    margin-bottom: 0.4rem;
+  }
+  .travel-count {
+    font-size: 0.74rem;
+    color: var(--color-ink-muted);
+    letter-spacing: 0.04em;
+  }
+</style>
